@@ -13,13 +13,14 @@ app.listen(PORT);
 console.log(`Server running at ${PORT}`);
 
 // error handler
-app.use((err, req, res) => {
+// eslint-disable-next-line no-unused-vars
+app.use((err, req, res, next) => {
   console.log(err);
-  const status = err.stauts || 500;
-  res.status(status).json({
-    status,
+  const sta = err.status || 500;
+  res.status(sta).json({
+    status: sta,
     message:
-      status !== 500
+      sta !== 500
         ? err.message || "エラーが発生しました。"
         : "エラーが発生しました。",
   });
