@@ -1,0 +1,50 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: ./
+      dockerfile: Dockerfile.app
+    volumes:
+      - ./src/:/app
+    ports:
+      - "3000:3000"
+    tty: true
+    stdin_open: true
+    depends_on:
+      - db
+    environment:
+      NODE_ENV: development
+      PORT: 3000
+  
+  db:
+    image: postgres:14
+    ports: 
+      - 5432:5432
+    volumes:
+      - postgres_volume:/var/lib/postgresql/data
+    environment:
+      POSTGRES_DB: cheesecake_db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_HOST: db
+      TZ: "Asia/Tokyo"
+      POSTGRES_HOST_AUTH_METHOD: trust
+
+  pgadmin4:
+        image: dpage/pgadmin4:latest
+        ports:
+            - 8080:80
+        volumes:
+            - pgadmin4_volume:/var/lib/pgadmin
+        environment:
+            PGADMIN_DEFAULT_EMAIL: root@cheesecake.com
+            PGADMIN_DEFAULT_PASSWORD: root
+        hostname: pgadmin4
+        depends_on:
+          - db
+
+volumes:
+  postgres_volume:
+  pgadmin4_volume:
+
