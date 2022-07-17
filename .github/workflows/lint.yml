@@ -8,7 +8,9 @@ on:
 jobs:
   ci:
     runs-on: ubuntu-latest
-
+    defaults:
+      run:
+        working-directory: ./src
     steps:
     - uses: actions/checkout@v3
     - name: Setup Node with Node16:latest
