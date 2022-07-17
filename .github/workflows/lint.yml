@@ -1,0 +1,21 @@
+
+name: lint code
+
+on:
+  pull-request:
+    branches: ["main"]
+
+jobs:
+  ci:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Setup Node with Node16:latest
+      uses: actions/setup-node@v3
+      with:
+        node-version: '16.x'
+        cache: 'yarn'
+        check-latest: true
+    - run: yarn
+    - run: yarn lint
