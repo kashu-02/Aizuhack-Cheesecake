@@ -6,7 +6,7 @@ const app = express();
 
 // /にアクセスがあった時、Deploy succeededと返す
 app.get("/", (req, res) => {
-  res.send("Deploy Succeeded.")
+  res.send("Deploy Succeeded.");
 });
 
 app.listen(PORT);
@@ -16,7 +16,7 @@ console.log(`Server running at ${PORT}`);
 // eslint-disable-next-line no-unused-vars
 app.use((err, req, res, next) => {
   console.log(err);
-  const sta = err.status || 500
+  const sta = err.status || 500;
   res.status(sta).json({
     status: sta,
     message:

@@ -21,4 +21,4 @@ jobs:
         cache-dependency-path: ./src/yarn.lock
         check-latest: true
     - run: yarn
-    - run: yarn lint
+    - run: yarn check-lint
