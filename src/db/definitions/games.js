@@ -15,5 +15,5 @@ export default sequelize.define("Users", {
   starttime: {
     type: DataTypes.DATE,
     allowNull: false,
-  }
+  },
 });
