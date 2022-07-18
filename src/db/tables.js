@@ -1,7 +1,7 @@
-import games from "./definitions/games";
-import groups from "./definitions/groups";
-import problems from "./definitions/problems";
-import users from "./definitions/users";
+import games from "./definitions/games.js";
+import groups from "./definitions/groups.js";
+import problems from "./definitions/problems.js";
+import users from "./definitions/users.js";
 
 export default (database) => {
   [games, groups, problems, users].forEach(async (table) => {
