@@ -19,16 +19,16 @@ const dbOptions = {
   dialect: "postgres",
   logging: true,
   operatorsAliases: true,
-}
+};
 
 const db = new Database(database, username, password, dbOptions);
 
-try{
+try {
   db.authenticate();
   app.get("/db", (req, res) => {
     res.send("DB Auth Succeeded.");
   });
-}catch (error){
+} catch (error) {
   app.get("/db", (req, res) => {
     res.send(`DB failed: ${error}`);
   });
