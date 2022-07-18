@@ -1,7 +1,7 @@
 import { DataTypes } from "sequelize";
 
 export default {
-  name: "Groups",
+  name: "groups",
   options: {
     groupid: {
       type: DataTypes.STRING,
