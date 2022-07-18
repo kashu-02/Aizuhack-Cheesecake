@@ -1,7 +1,7 @@
 import { DataTypes } from "sequelize";
 
 export default {
-  name: "Users",
+  name: "Problems",
   options: {
     problemid: {
       type: DataTypes.UUID,
