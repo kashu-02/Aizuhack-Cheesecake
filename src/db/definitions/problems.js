@@ -23,5 +23,5 @@ export default {
       type: DataTypes.STRING,
       allowNull: false,
     },
-  }
+  },
 };
