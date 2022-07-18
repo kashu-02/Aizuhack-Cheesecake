@@ -1,10 +1,19 @@
 // モジュールの読み込み
 import express from "express";
+import * as line from "@line/bot-sdk";
+
+import bot from "./bot.js";
+
 import Database from "./db/db.js";
 import initTables from "./db/tables.js";
 
 const PORT = process.env.PORT || 3000;
 const app = express();
+
+const config = {
+  channelAccessToken: process.env.ChannelAccessToken,
+  channelSecret: process.env.ChannelSecret,
+};
 
 const {
   DB_NAME: database,
@@ -40,6 +49,8 @@ initTables(db);
 app.get("/", (req, res) => {
   res.send("Deploy Succeeded.");
 });
+
+app.post("/webhook", line.middleware(config), bot(db));
 
 app.listen(PORT);
 console.log(`Server running at ${PORT}`);
