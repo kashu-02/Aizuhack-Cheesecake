@@ -27,7 +27,7 @@ export default class Database {
 
   async createTable(tableName, options) {
     const table = this.sequelize.define(tableName, options);
-    await this.sequelize.sync();
+    await table.sync({ force: true });
 
     this.tables.push(table);
     return table;
