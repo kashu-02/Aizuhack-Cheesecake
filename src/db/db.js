@@ -17,11 +17,18 @@ import { Sequelize } from "sequelize";
 export default class Database {
   constructor(database, username, password, options) {
     this.sequelize = new Sequelize(database, username, password, options);
+    this.tables = [];
+  }
+
+  get tables() {
+    return this.tables;
   }
 
   async createTable(tableName, options) {
     const table = this.sequelize.define(tableName, options);
     await this.sequelize.sync();
+
+    this.tables.push(table);
     return table;
   }
 }
