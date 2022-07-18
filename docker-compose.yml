@@ -13,6 +13,8 @@ services:
     stdin_open: true
     depends_on:
       - db
+    env_file:
+      - app.env
     environment:
       NODE_ENV: development
       PORT: 3000
