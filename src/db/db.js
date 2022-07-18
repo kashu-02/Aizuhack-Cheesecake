@@ -15,13 +15,14 @@ import { Sequelize } from "sequelize";
 // });
 
 export default class Database {
+  tables = [];
+
   constructor(database, username, password, options) {
     this.sequelize = new Sequelize(database, username, password, options);
-    this.tables = [];
   }
 
-  get tables() {
-    return this.tables;
+  async authenticate() {
+    await this.sequelize.authenticate();
   }
 
   async createTable(tableName, options) {
