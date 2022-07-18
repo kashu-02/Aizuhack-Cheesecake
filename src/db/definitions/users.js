@@ -1,7 +1,7 @@
 import { DataTypes } from "sequelize";
 
 export default {
-  name: "Users",
+  name: "users",
   options: {
     userid: {
       type: DataTypes.STRING,

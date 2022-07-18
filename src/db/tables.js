@@ -8,5 +8,13 @@ export default (database) => {
     database.createTable(table.name, table.options);
   });
 
+  database.groups.hasMany(database.users);
+  database.users.belongsTo(database.groups);
+  database.games.hasOne(database.groups);
+  database.groups.belongsTo(database.games);
+  database.games.hasOne(database.problems);
+
+  database.sync();
+
   return { games, groups, problems, users };
 };

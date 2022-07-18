@@ -23,12 +23,15 @@ export default class Database {
     await this.sequelize.authenticate();
   }
 
-  async createTable(tableName, options) {
+  createTable(tableName, options) {
     const table = this.sequelize.define(tableName, options);
-    await table.sync({ force: true });
 
     // eslint-disable-next-line no-eval
     eval(`this.${tableName} = table`);
     return table;
+  }
+
+  async sync() {
+    await this.sequelize.sync();
   }
 }
