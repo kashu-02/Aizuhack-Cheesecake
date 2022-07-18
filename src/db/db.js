@@ -15,8 +15,6 @@ import { Sequelize } from "sequelize";
 // });
 
 export default class Database {
-  tables = [];
-
   constructor(database, username, password, options) {
     this.sequelize = new Sequelize(database, username, password, options);
   }
@@ -29,7 +27,8 @@ export default class Database {
     const table = this.sequelize.define(tableName, options);
     await table.sync({ force: true });
 
-    this.tables.push(table);
+    // eslint-disable-next-line no-eval
+    eval(`this.${tableName} = table`);
     return table;
   }
 }
