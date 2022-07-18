@@ -16,6 +16,9 @@ services:
     environment:
       NODE_ENV: development
       PORT: 3000
+      DB_NAME: cheesecake_db
+      DB_USER: postgres
+      DB_PASS: postgres
   
   db:
     image: postgres:14
