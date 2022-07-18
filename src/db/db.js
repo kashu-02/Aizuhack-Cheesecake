@@ -20,6 +20,10 @@ export default class Database {
     this.tables = [];
   }
 
+  async authenticate(){
+    await this.sequelize.authenticate();
+  }
+
   get tables() {
     return this.tables;
   }
