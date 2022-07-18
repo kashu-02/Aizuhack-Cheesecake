@@ -21,7 +21,7 @@ export default class Database {
     this.sequelize = new Sequelize(database, username, password, options);
   }
 
-  async authenticate(){
+  async authenticate() {
     await this.sequelize.authenticate();
   }
 
