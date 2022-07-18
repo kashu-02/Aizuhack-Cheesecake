@@ -19,6 +19,7 @@ services:
       DB_NAME: cheesecake_db
       DB_USER: postgres
       DB_PASS: postgres
+      DB_HOST: db
   
   db:
     image: postgres:14
