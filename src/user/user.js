@@ -1,19 +1,22 @@
 import follow from "./follow.js";
-import unfollow from "./unfollow.js";
 import message from "./message.js";
+import unfollow from "./unfollow.js";
 
-export default (event, db) => {
+export default async (event, db) => {
+  let reply;
   switch (event.type) {
     case "follow":
-      follow(event, db);
+      reply = await follow(event, db);
       break;
     case "unfollow":
-      unfollow(event, db);
+      reply = await unfollow(event, db);
       break;
     case "message":
-      message(event, db);
+      reply = await message(event, db);
       break;
     default:
       break;
   }
+
+  return reply;
 };
