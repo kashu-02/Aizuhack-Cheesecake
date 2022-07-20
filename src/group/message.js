@@ -7,7 +7,7 @@ export default async (event, db) => {
   console.log(event.message.text);
   switch (event.message.text) {
     case "ゲーム作成":
-      reply = createGame(event, db);
+      reply = await createGame(event, db);
       break;
     case "参加":
       break;
