@@ -5,9 +5,6 @@ export default async (event, db) => {
   const users = (await db.users.findAll({ where: { groupid } })).length > 0;
 
   let reply;
-  console.log(groupid);
-  console.log(gameid);
-  console.log(users);
 
   try {
     if (gameid) await db.games.destroy({ where: { gameid } });
