@@ -1,3 +1,4 @@
+import createGame from "./message/createGame.js";
 import startGame from "./message/startGame.js";
 
 // eslint-disable-next-line no-unused-vars
@@ -6,6 +7,7 @@ export default (event, db) => {
   console.log(event.message.text);
   switch (event.message.text) {
     case "ゲーム作成":
+      reply = createGame(event, db);
       break;
     case "参加":
       break;
