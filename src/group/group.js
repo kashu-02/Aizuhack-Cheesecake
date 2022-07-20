@@ -3,17 +3,21 @@ import join from "./join.js";
 import leave from "./leave.js";
 
 export default (event, db) => {
+  let reply;
+
   switch (event.type) {
     case "message":
-      message(event, db);
+      reply = message(event, db);
       break;
     case "join":
-      join(event, db);
+      reply = join(event, db);
       break;
     case "leave":
-      leave(event, db);
+      reply = leave(event, db);
       break;
     default:
       break;
   }
+
+  return reply;
 };
