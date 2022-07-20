@@ -7,7 +7,7 @@ export default async (event, db) => {
 
   let reply;
 
-  const { groupid } = (await db.users.findOne({ where: { userid } }));
+  const { groupid } = await db.users.findOne({ where: { userid } });
   console.log(groupid);
   if (!groupid) {
     return {
@@ -24,7 +24,7 @@ export default async (event, db) => {
     };
   }
 
-  const {problemid} = await db.games.findOne({ where: { gameid } });
+  const { problemid } = await db.games.findOne({ where: { gameid } });
   const {
     problem_statement: problemStatement,
     answer_latitude: answerLatitude,
