@@ -59,6 +59,7 @@ console.log(`Server running at ${PORT}`);
 
 // error handler
 // eslint-disable-next-line no-unused-vars
+/*
 app.use((err, req, res, next) => {
   console.log(err);
   const sta = err.status || 500;
@@ -70,3 +71,4 @@ app.use((err, req, res, next) => {
         : "エラーが発生しました。",
   });
 });
+*/
