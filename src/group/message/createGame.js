@@ -10,7 +10,7 @@ export default async (event, db) => {
     reply = {
       type: "text",
       text: "データベース接続確立エラー",
-    }
+    };
   });
 
   if (exist !== null) {
@@ -28,5 +28,5 @@ export default async (event, db) => {
     text: `ゲームを作成しました: ${gameid}`,
   };
 
-  return reply
+  return reply;
 };
