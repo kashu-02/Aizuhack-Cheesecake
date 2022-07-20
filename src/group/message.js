@@ -1,4 +1,5 @@
 import createGame from "./message/createGame.js";
+import forceQuit from "./message/forceQuit.js";
 import startGame from "./message/startGame.js";
 import joinGame from "./message/joinGame.js";
 
@@ -17,6 +18,7 @@ export default async (event, db) => {
       reply = await startGame(event, db);
       break;
     case "強制終了":
+      reply = await forceQuit(event, db);
       break;
     /*
     case "もんだい":
