@@ -1,7 +1,7 @@
 import line from "@line/bot-sdk";
 
-import user from "./user/user.js";
 import group from "./group/group.js";
+import user from "./user/user.js";
 
 const client = new line.Client({
   channelAccessToken: process.env.ChannelAccessToken,
@@ -13,13 +13,13 @@ export default (req, res, db) => {
 
   console.log(`events: ${JSON.stringify(events)}`);
   let reply;
-  events.forEach((event) => {
+  events.forEach(async (event) => {
     switch (event.source.type) {
       case "user":
-        reply = user(event, res, db);
+        reply = await user(event, db);
         break;
       case "group":
-        reply = group(event, res, db);
+        reply = await group(event, db);
         break;
       case "room":
         console.log(`room`);
