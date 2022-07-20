@@ -1,7 +1,7 @@
 import line from "@line/bot-sdk";
 
-import user from "./user/user.js";
 import group from "./group/group.js";
+import user from "./user/user.js";
 
 const client = new line.Client({
   channelAccessToken: process.env.ChannelAccessToken,
