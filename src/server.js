@@ -26,7 +26,7 @@ const dbOptions = {
   host,
   port: 5432,
   dialect: "postgres",
-  logging: true,
+  logging: false,
   operatorsAliases: true,
 };
 
@@ -50,7 +50,9 @@ app.get("/", (req, res) => {
   res.send("Deploy Succeeded.");
 });
 
-app.post("/webhook", line.middleware(config), bot(db));
+app.post("/webhook", line.middleware(config), (req, res) => {
+  bot(req, res, db);
+});
 
 app.listen(PORT);
 console.log(`Server running at ${PORT}`);
