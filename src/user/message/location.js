@@ -7,7 +7,7 @@ export default async (event, db) => {
 
   let reply;
 
-  const { groupid } = await db.users.findOne({ where: { userid } });
+  const groupid = (await db.users.findOne({ where: { userid } }))?.groupid;
   console.log(groupid);
   if (!groupid) {
     return {
