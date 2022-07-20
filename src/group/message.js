@@ -1,5 +1,6 @@
 import createGame from "./message/createGame.js";
 import startGame from "./message/startGame.js";
+import joinGame from "./message/joinGame.js";
 
 // eslint-disable-next-line no-unused-vars
 export default async (event, db) => {
@@ -10,6 +11,7 @@ export default async (event, db) => {
       reply = await createGame(event, db);
       break;
     case "参加":
+      reply = await joinGame(event, db);
       break;
     case "ゲーム開始":
       reply = await startGame(event, db);

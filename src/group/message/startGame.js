@@ -6,8 +6,7 @@ moment.locale("ja");
 
 // eslint-disable-next-line no-unused-vars
 export default async (event, db) => {
-  let message;
-  const { gameid } = await db.groups
+  const groups = await db.groups
     .findOne({
       where: {
         groupid: event.source.groupId,
@@ -15,15 +14,22 @@ export default async (event, db) => {
     })
     .catch((err) => {
       console.log(`Error: ${err}`);
-      message = {
+      return {
         type: "text",
         text: `データベースエラー`,
       };
     });
+  if (!groups) {
+    return {
+      type: "text",
+      text: `ゲームが作成されていません`,
+    };
+  }
+  const { gameid } = groups;
 
   const problems = await db.problems.findAll({}).catch((err) => {
     console.log(`Error: ${err}`);
-    message = {
+    return {
       type: "text",
       text: `データベースエラー`,
     };
@@ -31,6 +37,18 @@ export default async (event, db) => {
   console.log(`problems: ${JSON.stringify(problems)}`);
   const { problemid, problem_statement } =
     problems[Math.floor(Math.random() * problems.length)];
+
+  const isExistGameid = await db.games.findOne({
+    where: {
+      gameid,
+    },
+  });
+  if (isExistGameid) {
+    return {
+      type: "text",
+      text: `すでに進行中のゲームがあります。終了するには「強制終了」と返信してください`,
+    };
+  }
 
   db.games
     .create({
@@ -40,16 +58,14 @@ export default async (event, db) => {
     })
     .catch((err) => {
       console.log(`Error: ${err}`);
-      message = {
+      return {
         type: "text",
         text: `データベースエラー`,
       };
     });
 
-  message = {
+  return {
     type: "text",
     text: `問題開始\n\n問題文: ${problem_statement}\n\n問題ID: ${problemid}`,
   };
-
-  return message;
 };
