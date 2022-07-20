@@ -6,7 +6,7 @@ moment.locale("ja");
 
 // eslint-disable-next-line no-unused-vars
 export default async (event, db) => {
-  const  groups = await db.groups
+  const groups = await db.groups
     .findOne({
       where: {
         groupid: event.source.groupId,
@@ -42,14 +42,14 @@ export default async (event, db) => {
     where: {
       gameid,
     },
-  })
+  });
   if (isExistGameid) {
     return {
       type: "text",
       text: `すでに進行中のゲームがあります。終了するには「強制終了」と返信してください`,
     };
   }
-  
+
   db.games
     .create({
       gameid,
@@ -68,5 +68,4 @@ export default async (event, db) => {
     type: "text",
     text: `問題開始\n\n問題文: ${problem_statement}\n\n問題ID: ${problemid}`,
   };
-
 };
