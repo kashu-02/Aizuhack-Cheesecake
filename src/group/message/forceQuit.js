@@ -24,7 +24,7 @@ export default async (event, db) => {
         type: "text",
         text: "強制終了処理が完了しました",
       };
-    };
+    }
   } catch (err) {
     console.log(`error during forceQuit(): \n\t ${err}`);
     reply = {
