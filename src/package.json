@@ -5,7 +5,8 @@
   "scripts": {
     "start": "nodemon server.js",
     "lint": "yarn prettier --write '**/*.{js,json,md,html}' && yarn eslint --fix .",
-    "check-lint": "yarn prettier --check '**/*.{js,json,md,html}' && yarn eslint ."
+    "check-lint": "yarn prettier --check '**/*.{js,json,md,html}' && yarn eslint .",
+    "start-production": "node server.js"
   },
   "repository": "https://github.com/kashu-02/Aizuhack-Cheesecake",
   "license": "MIT",
