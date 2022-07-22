@@ -85,8 +85,8 @@ jobs:
           source: ./src
           env_vars: NODE_ENV=production
           secrets: |
-            ChannelAccessToken=ChannelAccessToken
-            ChannelSecret=ChannelSecret
+            ChannelAccessToken=ChannelAccessToken:latest
+            ChannelSecret=ChannelSecret:latest
       # If required, use the Cloud Run url output in later steps
       - name: Show Output
         run: echo ${{ steps.deploy.outputs.url }}
