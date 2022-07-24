@@ -87,6 +87,10 @@ jobs:
           secrets: |
             ChannelAccessToken=ChannelAccessToken:latest
             ChannelSecret=ChannelSecret:latest
+            POSTGRES_DB=POSTGRES_DB:latest
+            POSTGRES_HOST=POSTGRES_HOST:latest
+            POSTGRES_USER=POSTGRES_USER:latest
+            POSTGRES_PASSWORD=POSTGRES_PASSWORD:latest
       # If required, use the Cloud Run url output in later steps
       - name: Show Output
         run: echo ${{ steps.deploy.outputs.url }}
