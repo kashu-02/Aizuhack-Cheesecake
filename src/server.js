@@ -22,13 +22,27 @@ const {
   DB_HOST: host,
 } = process.env;
 
-const dbOptions = {
-  host,
-  port: 5432,
-  dialect: "postgres",
-  logging: false,
-  operatorsAliases: true,
-};
+let dbOptions;
+if (process.env.NODE_ENV === "production") {
+  dbOptions = {
+    host,
+    port: 5432,
+    dialect: "postgres",
+    dialectOptions: {
+      socketPath: process.env.DB_HOST,
+    },
+    logging: false,
+    operatorsAliases: true,
+  };
+} else {
+  dbOptions = {
+    host,
+    port: 5432,
+    dialect: "postgres",
+    logging: false,
+    operatorsAliases: true,
+  };
+ }
 
 const db = new Database(database, username, password, dbOptions);
 
