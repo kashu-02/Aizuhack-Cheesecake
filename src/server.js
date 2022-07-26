@@ -42,7 +42,7 @@ if (process.env.NODE_ENV === "production") {
     logging: false,
     operatorsAliases: true,
   };
- }
+}
 
 const db = new Database(database, username, password, dbOptions);
 
