@@ -4,10 +4,10 @@ export default {
   name: "problems",
   options: {
     problemid: {
-      type: DataTypes.UUID,
+      type: DataTypes.INTEGER,
       allowNull: false,
       primaryKey: true,
-      unique: true,
+      autoIncrement: true,
     },
     problem_statement: {
       type: DataTypes.TEXT,
@@ -26,6 +26,11 @@ export default {
     answer_name: {
       // 答え(名前)
       type: DataTypes.STRING,
+      allowNull: false,
+    },
+    answer_description: {
+      // 答え(説明)
+      type: DataTypes.TEXT,
       allowNull: false,
     },
   },

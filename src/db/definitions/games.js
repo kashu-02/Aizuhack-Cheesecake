@@ -10,7 +10,7 @@ export default {
       unique: true,
     },
     problemid: {
-      type: DataTypes.UUID,
+      type: DataTypes.INTEGER,
       allowNull: false,
     },
     starttime: {
