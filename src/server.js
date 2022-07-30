@@ -29,7 +29,7 @@ if (process.env.NODE_ENV === "production") {
     port: 5432,
     dialect: "postgres",
     dialectOptions: {
-      socketPath: process.env.DB_HOST,
+      socketPath: host,
     },
     logging: false,
     operatorsAliases: true,
