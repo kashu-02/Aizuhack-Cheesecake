@@ -1,0 +1,40 @@
+doctype html
+html(lang="ja")
+  head
+    meta(charset="UTF-8")
+    meta(http-equiv="X-UA-Compatible", content="IE=edge")
+    meta(name="viewport", content="width=device-width, initial-scale=1.0")
+    script(charset="utf-8", src="https://static.line-scdn.net/liff/edge/2/sdk.js")
+    title LIFFを初期化中
+  body
+    .contaner
+      p#message
+        | LIFFアプリを初期化しています…
+      p#debugmessage(style="color: white;")
+        | DEBUG
+        br
+    script(type="module").
+      try{
+        const liffId = '#{liffId}';
+        document.getElementById('debugmessage').innerHTML += `LIFF ID: ${liffId}`;
+        // LIFFがLIFFブラウザで実行されてるか確認する。
+        const isLiffBrowser = liff.isInClient();
+        if(!isLiffBrowser){
+          throw new Error("LINE内LIFFブラウザで実行してください。")
+        }
+        document.getElementById('debugmessage').innerHTML += '<br>LIFF Browser: ' + isLiffBrowser;
+        
+        await liff.init({
+          liffId: liffId
+        }).catch((err) =>{
+          throw new Error("LIFF初期化に失敗しました。")
+        });
+        
+        const isFriend = await liff.getFriendship();
+        if(isFriend.friendFlag){
+          throw new Error('友達ではありません。<br>友だち追加をしてください。<br><a href="https://line.me/R/ti/p/%40487jqgyo"></a>')
+        }
+        document.getElementById('debugmessage').innerHTML += '<br>Friendship: ' + isFriend.friendFlag;
+      }catch(err){
+        document.getElementById('message').innerHTML = err.message;
+      }

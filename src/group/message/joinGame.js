@@ -6,13 +6,28 @@ const client = new line.Client({
 });
 
 export default async (event, db) => {
+  const groupid = event.source.groupId;
+  const isExistGroup = await db.groups.findOne({ where: { groupid } }).catch((err) => {
+    console.log(err);
+    return {
+      type: "text",
+      text: "データベース接続確立エラー",
+    };
+  });
+  if (!isExistGroup) {
+    return {
+      type: "text",
+      text: "進行中のゲームがありません",
+    };
+  }
+
   const userName = (
     await client.getGroupMemberProfile(
       event.source.groupId,
       event.source.userId
     )
   ).displayName;
-  const isNotExistUser = await db.users
+  const isExistUser = await db.users
     .findOne({ where: { userid: event.source.userId } })
     .catch((err) => {
       console.log(err);
@@ -22,7 +37,7 @@ export default async (event, db) => {
       };
     });
 
-  if (isNotExistUser) {
+  if (isExistUser) {
     return {
       type: "text",
       text: `すでに${userName}さんは参加しています。`,

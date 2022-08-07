@@ -1,0 +1,78 @@
+doctype html
+html(lang="ja")
+  head
+    meta(charset="UTF-8")
+    meta(http-equiv="X-UA-Compatible", content="IE=edge")
+    meta(name="viewport", content="width=device-width, initial-scale=1.0")
+    script(charset="utf-8", src="https://static.line-scdn.net/liff/edge/2/sdk.js")
+    title 位置情報送信
+  body
+    .contaner
+      p#message
+        | 位置情報を取得しています。
+        br
+        | 位置情報の取得許可を求めるポップアップが表示された場合は許可してください。
+      p#debugmessage(style="color: white;")
+        | DEBUG
+        br
+    script(type="module").
+      try{
+        const liffId = '#{liffId}';
+        await liff.init({
+        liffId
+        }).catch((err) =>{
+        throw new Error("LIFF初期化に失敗しました。")
+        });
+        
+        navigator.geolocation.getCurrentPosition(locationSuccess, locationError, {
+        enableHighAccuracy: true,
+        timeout: Infinity,
+        maximumAge: 0
+        });
+      }catch(err){
+        document.getElementById('message').innerHTML = err.message;
+      }
+      
+      function locationSuccess(position){
+        const latitude = position.coords.latitude;
+        const longitude = position.coords.longitude;
+        const accuracy = position.coords.accuracy;
+        const altitude = position.coords.altitude;
+        const altitudeAccuracy = position.coords.altitudeAccuracy;
+        const heading = position.coords.heading;
+        const speed = position.coords.speed;
+        const timestamp = position.timestamp;
+        const message = `
+        緯度: ${latitude}<br>
+        経度: ${longitude}<br>
+        精度: ${accuracy}<br>
+        高度: ${altitude}<br>
+        高度精度: ${altitudeAccuracy}<br>
+        方角: ${heading}<br>
+        速度: ${speed}<br>
+        時刻: ${timestamp}<br>
+        `;
+        document.getElementById('debugmessage').innerHTML = message;
+
+        liff.sendMessages([{
+        type: 'location',
+        title: '位置情報',
+        address: `${latitude}, ${longitude}`,
+        latitude: latitude,
+        longitude: longitude,
+        }]).then(() =>{
+        document.getElementById('message').innerHTML = '位置情報を送信しました。';
+        liff.closeWindow()
+        }).catch((err) =>{
+        throw new Error("位置情報の送信に失敗しました。")
+        });
+        
+      }
+      
+      function locationError(error){
+        const message = `
+        エラーコード: ${error.code}<br>
+        エラー詳細: ${error.message}<br>
+        `;
+        document.getElementById('message').innerHTML = message;
+      }

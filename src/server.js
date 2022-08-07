@@ -3,6 +3,9 @@ import express from "express";
 import * as line from "@line/bot-sdk";
 
 import bot from "./bot.js";
+// eslint-disable-next-line import/no-cycle
+import api from "./api/index.js";
+import liff from "./liff/index.js";
 
 import Database from "./db/db.js";
 import initTables from "./db/tables.js";
@@ -58,6 +61,8 @@ try {
 }
 
 initTables(db);
+// eslint-disable-next-line import/prefer-default-export
+export { db };
 
 // /にアクセスがあった時、Deploy succeededと返す
 app.get("/", (req, res) => {
@@ -67,13 +72,21 @@ app.get("/", (req, res) => {
 app.post("/webhook", line.middleware(config), (req, res) => {
   bot(req, res, db);
 });
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use("/api", api);
+app.set("views", "liff/html");
+app.set('view engine', 'pug');
+app.use("/liff", liff)
+
 
 app.listen(PORT);
 console.log(`Server running at ${PORT}`);
 
+
+
 // error handler
 // eslint-disable-next-line no-unused-vars
-/*
 app.use((err, req, res, next) => {
   console.log(err);
   const sta = err.status || 500;
@@ -85,4 +98,3 @@ app.use((err, req, res, next) => {
         : "エラーが発生しました。",
   });
 });
-*/
