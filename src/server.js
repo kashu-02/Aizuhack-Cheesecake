@@ -3,12 +3,9 @@ import express from "express";
 import * as line from "@line/bot-sdk";
 
 import bot from "./bot.js";
-<<<<<<< HEAD
 // eslint-disable-next-line import/no-cycle
 import api from "./api/index.js";
 import liff from "./liff/index.js";
-=======
->>>>>>> 87bcc69012c0d7881d2f39e190f710f617100747
 
 import Database from "./db/db.js";
 import initTables from "./db/tables.js";
