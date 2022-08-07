@@ -3,7 +3,9 @@ import express from "express";
 import * as line from "@line/bot-sdk";
 
 import bot from "./bot.js";
+// eslint-disable-next-line import/no-cycle
 import api from "./api/index.js";
+import liff from "./liff/index.js";
 
 import Database from "./db/db.js";
 import initTables from "./db/tables.js";
@@ -73,6 +75,10 @@ app.post("/webhook", line.middleware(config), (req, res) => {
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use("/api", api);
+app.set("views", "liff/html");
+app.set('view engine', 'pug');
+app.use("/liff", liff)
+
 
 app.listen(PORT);
 console.log(`Server running at ${PORT}`);
