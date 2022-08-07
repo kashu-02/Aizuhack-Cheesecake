@@ -86,16 +86,10 @@ app.use("/liff", liff)
 app.listen(PORT);
 console.log(`Server running at ${PORT}`);
 
-<<<<<<< HEAD
 
 
 // error handler
 // eslint-disable-next-line no-unused-vars
-=======
-// error handler
-// eslint-disable-next-line no-unused-vars
-/*
->>>>>>> 87bcc69012c0d7881d2f39e190f710f617100747
 app.use((err, req, res, next) => {
   console.log(err);
   const sta = err.status || 500;
@@ -107,7 +101,3 @@ app.use((err, req, res, next) => {
         : "エラーが発生しました。",
   });
 });
-<<<<<<< HEAD
-=======
-*/
->>>>>>> 87bcc69012c0d7881d2f39e190f710f617100747
