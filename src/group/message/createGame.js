@@ -1,4 +1,5 @@
 import crypto from "crypto";
+import flexMessage from '../../flexmessage/index.js'
 
 export default async (event, db) => {
   const groupid = event.source.groupId;
@@ -23,7 +24,8 @@ export default async (event, db) => {
 
   console.log(`created game: groupid=${groupid}, gameid=${gameid})}`);
   return {
-    type: "text",
-    text: `ゲームを作成しました: ${gameid}`,
+    type: "flex",
+    altText: "ゲームを作成しました",
+    contents: flexMessage.createGame(),
   };
 };
