@@ -12,7 +12,12 @@ export default async (event, db) => {
     case "いち":
       return {
         type: "text",
-        text: `https://liff.line.me/${liffId}/sendlocation`,
+        text: `https://liff.line.me/${liffId}/sendlocation?from=answer`,
+      };
+    case "ヒント":
+      return {
+        type: "text",
+        text: `https://liff.line.me/${liffId}/sendlocation?from=hint`,
       };
     default:
       break;

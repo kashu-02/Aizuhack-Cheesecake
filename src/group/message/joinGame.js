@@ -7,13 +7,15 @@ const client = new line.Client({
 
 export default async (event, db) => {
   const groupid = event.source.groupId;
-  const isExistGroup = await db.groups.findOne({ where: { groupid } }).catch((err) => {
-    console.log(err);
-    return {
-      type: "text",
-      text: "データベース接続確立エラー",
-    };
-  });
+  const isExistGroup = await db.groups
+    .findOne({ where: { groupid } })
+    .catch((err) => {
+      console.log(err);
+      return {
+        type: "text",
+        text: "データベース接続確立エラー",
+      };
+    });
   if (!isExistGroup) {
     return {
       type: "text",
@@ -51,6 +53,20 @@ export default async (event, db) => {
     })
     .catch((err) => {
       console.log(err);
+      return {
+        type: "text",
+        text: "データベースエラー",
+      };
+    });
+
+  db.hintquota
+    .create({
+      userid: event.source.userId,
+      lasthint: null,
+    })
+    .catch((err) => {
+      console.log(err);
+      db.users.destroy({ where: { userid: event.source.userId } });
       return {
         type: "text",
         text: "データベースエラー",
