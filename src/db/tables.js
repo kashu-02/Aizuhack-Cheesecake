@@ -14,7 +14,8 @@ export default (database) => {
   database.games.hasOne(database.groups);
   database.groups.belongsTo(database.games);
   database.games.hasOne(database.problems);
-  database.hintquota.hasOne(database.users);
+
+  database.users.hasOne(database.hintquota);
 
   database.sync();
 
