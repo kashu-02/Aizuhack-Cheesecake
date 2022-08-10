@@ -76,14 +76,11 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use("/api", api);
 app.set("views", "liff/html");
-app.set('view engine', 'pug');
-app.use("/liff", liff)
-
+app.set("view engine", "pug");
+app.use("/liff", liff);
 
 app.listen(PORT);
 console.log(`Server running at ${PORT}`);
-
-
 
 // error handler
 // eslint-disable-next-line no-unused-vars
