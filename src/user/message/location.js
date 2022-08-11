@@ -1,4 +1,5 @@
 import forceQuit from "../../group/message/forceQuit.js";
+import flexMessage from "../../flexmessage/index.js";
 
 const checkAnswer = async (event, db) => {
   const latitudeToleranceMeter = 30;
@@ -60,8 +61,9 @@ const checkAnswer = async (event, db) => {
     }
   } else {
     reply = {
-      type: "text",
-      text: `不正解です…… \n\n問題文: ${problemStatement}`,
+      type: "flex",
+      altText: "不正解です…",
+      contents: flexMessage.incorrect(problemStatement),
     };
   }
 
