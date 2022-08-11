@@ -1,4 +1,5 @@
 import line from "@line/bot-sdk";
+import flexMessage from "../../flexmessage/index.js";
 
 const client = new line.Client({
   channelAccessToken: process.env.ChannelAccessToken,
@@ -73,8 +74,9 @@ export default async (event, db) => {
       };
     });
 
-  return {
-    type: "text",
-    text: `${userName}さんが参加しました。`,
-  };
+    return {
+      type: "flex",
+      altText: "問題開始",
+      contents: flexMessage.joinGame(userName),
+    };
 };

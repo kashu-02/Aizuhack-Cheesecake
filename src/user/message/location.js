@@ -47,8 +47,9 @@ const checkAnswer = async (event, db) => {
     Math.abs(longitude - answerLongitude) <= longitudeToleranceDegree
   ) {
     reply = {
-      type: "text",
-      text: `正解です！ \n\n問題: ${answerName}\n問題文: ${problemStatement}`,
+      type: "flex",
+      altText: "正解です…",
+      contents: flexMessage.correct(problemStatement, answerName),
     };
 
     const quitMessage = await forceQuit({ source: { groupId: groupid } }, db);

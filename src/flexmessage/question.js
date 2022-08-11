@@ -20,17 +20,10 @@ export default (text) => ({
             },
             {
               type: "text",
-              contents: [
-                {
-                  type: "span",
-                  text: `${text}`,
-                  size: "25px",
-                  weight: "regular"
-                }
-              ],
-              lineSpacing: "100px",
-              position: "relative",
-              wrap: true
+              contents: [],
+              wrap: true,
+              text,
+              size: "xl"
             },
             {
               type: "text",
