@@ -1,5 +1,5 @@
-import location from "./message/location.js";
 import flexMessage from "../flexmessage/index.js";
+import location from "./message/location.js";
 
 // eslint-disable-next-line no-unused-vars
 export default async (event, db) => {
@@ -26,7 +26,7 @@ export default async (event, db) => {
       return {
         type: "flex",
         altText: "問題はこちらです",
-        contents: flexMessage.question(),
+        contents: flexMessage.question("会津若松市のシンボル「鶴ヶ城」。白虎隊士も見た国内唯一の赤瓦の天守閣が甦りました！"),
       };
     default:
       break;
