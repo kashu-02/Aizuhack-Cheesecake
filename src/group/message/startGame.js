@@ -1,6 +1,7 @@
 /* eslint-disable camelcase */
 import moment from "moment";
 import "moment/locale/ja.js";
+import flexMessage from "../../flexmessage/index.js";
 
 moment.locale("ja");
 
@@ -63,9 +64,10 @@ export default async (event, db) => {
         text: `データベースエラー`,
       };
     });
-
+  
   return {
-    type: "text",
-    text: `問題開始\n\n問題文: ${problem_statement}\n\n問題ID: ${problemid}`,
+    type: "flex",
+    altText: "問題開始",
+    contents: flexMessage.question(problem_statement),
   };
 };
