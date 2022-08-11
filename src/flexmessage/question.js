@@ -22,7 +22,7 @@ export default (text) => ({
               type: "text",
               contents: [],
               wrap: true,
-              text: `${text}`,
+              text,
               size: "xl"
             },
             {
