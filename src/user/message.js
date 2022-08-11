@@ -1,4 +1,5 @@
 import location from "./message/location.js";
+import flexMessage from "../flexmessage/index.js";
 
 // eslint-disable-next-line no-unused-vars
 export default async (event, db) => {
@@ -6,10 +7,6 @@ export default async (event, db) => {
   const liffId = process.env.LIFFID;
   switch (event.message.text) {
     case "回答":
-      break;
-    case "あああ":
-      break;
-    case "いち":
       return {
         type: "text",
         text: `https://liff.line.me/${liffId}/sendlocation?answer`,
@@ -18,6 +15,18 @@ export default async (event, db) => {
       return {
         type: "text",
         text: `https://liff.line.me/${liffId}/sendlocation?hint`,
+      };
+    case "ルールを確認":
+      return {
+        type: "flex",
+        altText: "ルールはこちらです",
+        contents: flexMessage.ruleExpresstion(),
+      };
+    case "問題を確認":
+      return {
+        type: "flex",
+        altText: "問題はこちらです",
+        contents: flexMessage.question(),
       };
     default:
       break;
