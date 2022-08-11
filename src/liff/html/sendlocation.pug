@@ -56,7 +56,7 @@ html(lang="ja")
 
         liff.sendMessages([{
         type: 'location',
-        title: '位置情報',
+        title:  location.search === '?hint' ? 'hint' : 'answer',
         address: `${latitude}, ${longitude}`,
         latitude: latitude,
         longitude: longitude,

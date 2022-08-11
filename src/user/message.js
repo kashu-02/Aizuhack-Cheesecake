@@ -9,7 +9,12 @@ export default async (event, db) => {
     case "回答":
       return {
         type: "text",
-        text: `https://liff.line.me/${liffId}/sendlocation`,
+        text: `https://liff.line.me/${liffId}/sendlocation?answer`,
+      };
+    case "ヒント":
+      return {
+        type: "text",
+        text: `https://liff.line.me/${liffId}/sendlocation?hint`,
       };
     case "ルールを確認":
       return {
