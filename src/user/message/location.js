@@ -71,7 +71,7 @@ const checkAnswer = async (event, db) => {
 const checkHint = async (event, db) => {
   const userid = event.source.userId;
 
-  const lastHint = (await db.hintquota.findOne({ where: { userid } })).dataValues.lasthint;
+  const lastHint = (await db.hintquota.findOne({ where: { userid } }))?.dataValues.lasthint;
   const currentDate = new Date();
 
   const groupid = (await db.users.findOne({ where: { userid } }))?.groupid;
