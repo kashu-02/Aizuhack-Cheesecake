@@ -1,6 +1,6 @@
 import forceQuit from "../../group/message/forceQuit.js";
 
-export default async (event, db) => {
+const checkAnswer = async (event, db) => {
   const latitudeToleranceMeter = 30;
   const longitudeToleranceMeter = 30;
   const userid = event.source.userId;
@@ -63,6 +63,69 @@ export default async (event, db) => {
       type: "text",
       text: `不正解です…… \n\n問題文: ${problemStatement}`,
     };
+  }
+
+  return reply;
+};
+
+const checkHint = async (event, db) => {
+  const userid = event.source.userId;
+
+  const lastHint = db.hintquota.findOne({ where: { userid } });
+  const currentDate = new Date();
+
+  const groupid = (await db.users.findOne({ where: { userid } }))?.groupid;
+  console.log(groupid);
+  if (!groupid) {
+    return {
+      type: "text",
+      text: "参加中のゲームがありません",
+    };
+  }
+
+  const gameid = (await db.groups.findOne({ where: { groupid } }))?.gameid;
+  if (!gameid) {
+    return {
+      type: "text",
+      text: "参加中のゲームが開始していません",
+    };
+  }
+
+  if(!lastHint || currentDate - lastHint >= 600_000) {
+    const { problemid } = await db.games.findOne({ where: { gameid } });
+    const {
+      answer_latitude: answerLatitude,
+      answer_longitude: answerLongitude,
+    } = await db.problems.findOne({ where: { problemid } });
+
+    const { latitude, longitude } = event.message;
+
+    const latitudeDiff = answerLatitude - latitude;
+    const longitudeDiff = answerLongitude -longitude;
+
+    let direction = latitudeDiff >= 0.0 ? '北' : '南';
+    direction += (longitudeDiff >= 0.0 ? '東' : '西');
+
+    db.hintquota.update({ lasthint: currentDate }, { where: { userid } });
+
+    return {
+      type: "text",
+      text: `目標はおおよそ ${direction} 方向です`
+    }
+  }
+
+  return {
+    type: "text",
+    text: `前回のヒントから20分以上経過していません。\n 前回のヒントは ${lastHint} です。`,
+  }
+}
+
+export default async (event, db) => {
+  let reply;
+  if ( event.message.title === 'hint' ){
+    reply = checkHint(event, db);
+  } else {
+    reply = checkAnswer(event, db);
   }
 
   return reply;
