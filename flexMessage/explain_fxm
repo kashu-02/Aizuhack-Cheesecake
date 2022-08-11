@@ -36,33 +36,33 @@
     "contents": [
       {
         "type": "text",
-        "text": "Total: 1 hour",
-        "size": "xs"
+        "text": "①問題の示している場所に各自向かう",
+        "size": "md"
       },
       {
         "type": "text",
-        "text": "Total: 1 hour",
-        "size": "xs"
+        "text": "②そうだと思う場所に着いたら「GOALはここ」ボタンを押す",
+        "size": "md"
       },
       {
         "type": "text",
-        "text": "Total: 1 hour",
-        "size": "xs"
+        "text": "③誰が最初に正解できるのかを競いましょう！ ",
+        "size": "md"
       },
       {
         "type": "text",
-        "text": "Total: 1 hour",
-        "size": "xs"
+        "text": "・ゴールの回答は「ゴールはここ！」ボタンで回答できます",
+        "size": "md"
       },
       {
         "type": "text",
-        "text": "Total: 1 hour",
-        "size": "xs"
+        "text": "・途中でゲームを終わりたい場合は「ゲームを終了する」ボタンを押す",
+        "size": "md"
       },
       {
         "type": "text",
-        "text": "Total: 1 hour",
-        "size": "xs"
+        "text": "・「ヒント」と押すとヒントが見れます",
+        "size": "md"
       }
     ]
   }
