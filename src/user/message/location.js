@@ -125,6 +125,12 @@ const checkHint = async (event, db) => {
 
 export default async (event, db) => {
   let reply;
+  if (!(event.message.title === 'hint' || event.message.title === 'answer')) {
+    return {
+      type: "text",
+      text: "リッチメニューから位置情報を送信してください。",
+    };
+  }
   if ( event.message.title === 'hint' ){
     reply = checkHint(event, db);
   } else {
